@@ -20,10 +20,8 @@ function useScanner(
   }, [onError]);
 
   useEffect(() => {
-    if (!previewRef.current) return;
-
-    if (previewRef.current.children[0]) {
-      previewRef.current.children[0].className.concat(" w-full");
+    if (!previewRef.current) {
+      return;
     }
 
     const html5QrcodeScanner = new Html5Qrcode(previewRef.current.id);
@@ -31,7 +29,10 @@ function useScanner(
     const didStart = html5QrcodeScanner
       .start(
         { facingMode: "environment" },
-        { fps: 10, qrbox: { width: 420, height: 192 } },
+        {
+          fps: 10,
+          // qrbox: { width: 420, height: 192 }
+        },
         (_, { result }) => {
           memoizedResultHandler.current(result);
           html5QrcodeScanner.stop();
@@ -46,7 +47,7 @@ function useScanner(
       didStart
         .then(() => html5QrcodeScanner.stop())
         .catch(() => {
-          console.log("Error stopping scanner");
+          // console.log("Error stopping scanner");
         });
     };
   }, [previewRef, memoizedResultHandler, memoizedErrorHandler]);

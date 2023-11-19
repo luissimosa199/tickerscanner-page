@@ -1,5 +1,5 @@
 "use client";
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { Html5QrcodeError, QrcodeResult } from "html5-qrcode/esm/core";
 import useScanner from "@/hooks/useScanner";
 import { scanTicket } from "@/utils/scanTicket";
@@ -16,7 +16,7 @@ const Page = () => {
   }, []);
 
   const onError = useCallback((error: Html5QrcodeError) => {
-    // console.log("error");
+    return;
   }, []);
 
   const previewRef = useScanner(onSuccess, onError);
@@ -35,6 +35,7 @@ const Page = () => {
             <div
               ref={previewRef}
               id="qr-container"
+              className="w-full h-full"
             ></div>
           </div>
           <div className="flex justify-center w-full px-24">
