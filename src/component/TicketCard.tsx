@@ -32,7 +32,7 @@ const TicketCard = ({ ticket }: { ticket: Ticket }) => {
           </p>
         </div>
         <div className="w-6 h-6 ml-auto self-center flex justify-center items-center rounded-full bg-white p-4 shadow-md">
-          <OpenCardButton setState={toggleOpenCard} />
+          {/* <OpenCardButton setState={toggleOpenCard} /> */}
         </div>
       </div>
       {isOpen && (
