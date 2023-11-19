@@ -1,3 +1,4 @@
+import LoginLink from "@/component/LoginLink";
 import Link from "next/link";
 
 export default function Home() {
@@ -17,12 +18,7 @@ export default function Home() {
           >
             Comenzar
           </Link>
-          <Link
-            href="/login"
-            className="italic font-semibold"
-          >
-            o Ingresar...
-          </Link>
+          <LoginLink />
         </div>
         <div className="flex justify-end absolute bottom-2">
           <p className="text-red-900 font-semibold text-sm">
