@@ -38,6 +38,14 @@ export const scanTicket = async (url: string) => {
       };
     }
 
+    if (response.status !== 200) {
+      return {
+        success: false,
+        error: response.statusText,
+        message: "Error",
+      };
+    }
+
     console.log({ response });
 
     // TODO: handle conflict error (duplicate)

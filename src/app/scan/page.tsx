@@ -13,6 +13,8 @@ const Page = () => {
   const onSuccess = useCallback(async (result: QrcodeResult) => {
     const response = await scanTicket(result.text);
 
+    console.log({ response });
+
     setTicket(response);
   }, []);
 
