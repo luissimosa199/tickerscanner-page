@@ -5,6 +5,7 @@ import useScanner from "@/hooks/useScanner";
 import { scanTicket } from "@/utils/scanTicket";
 import { Ticket } from "@/types";
 import OneTicketView from "@/component/OneTicketCard";
+import Link from "next/link";
 
 const Page = () => {
   const [ticket, setTicket] = useState<Ticket | null>(null);
@@ -26,10 +27,15 @@ const Page = () => {
       {/* stage 1 */}
       {!ticket && (
         <div className="min-h-screen flex flex-col gap-6 pt-4 justify-between items-center">
-          <div>
+          <div className="w-full relative">
             <h1 className="font-bold text-2xl text-white text-center">
               Ticker Scanner
             </h1>
+            <div className="w-8 h-8 bg-white absolute right-2 top-0 rounded-full flex justify-center items-center">
+              <Link href="/dashboard">
+                <span>🙆‍♂️</span>
+              </Link>
+            </div>
           </div>
           <div className="w-full h-72 md:h-96 mx-auto overflow-hidden flex justify-center items-center">
             <div
