@@ -44,10 +44,12 @@ const Dashboard = async () => {
         <ul className="p-4 mx-auto">
           {tickets.map((ticket) => {
             return (
-              <TicketCard
-                key={ticket._id}
-                ticket={ticket}
-              />
+              <>
+                <TicketCard
+                  key={ticket._id}
+                  ticket={ticket}
+                />
+              </>
             );
           })}
         </ul>

@@ -21,20 +21,27 @@ function useScanner(
 
   useEffect(() => {
     if (!previewRef.current) return;
+
+    if (previewRef.current.children[0]) {
+      previewRef.current.children[0].className.concat(" w-full");
+    }
+
     const html5QrcodeScanner = new Html5Qrcode(previewRef.current.id);
+
     const didStart = html5QrcodeScanner
       .start(
         { facingMode: "environment" },
         { fps: 10, qrbox: { width: 420, height: 192 } },
         (_, { result }) => {
           memoizedResultHandler.current(result);
-          html5QrcodeScanner.stop()
+          html5QrcodeScanner.stop();
         },
         (_, error) => {
           memoizedErrorHandler.current(error);
         }
       )
       .then(() => true);
+
     return () => {
       didStart
         .then(() => html5QrcodeScanner.stop())
