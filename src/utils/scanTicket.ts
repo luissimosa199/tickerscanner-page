@@ -38,6 +38,8 @@ export const scanTicket = async (url: string) => {
       };
     }
 
+    console.log({ response });
+
     // TODO: handle conflict error (duplicate)
 
     return response.json();

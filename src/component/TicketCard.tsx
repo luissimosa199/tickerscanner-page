@@ -35,7 +35,7 @@ const TicketCard = ({ ticket }: { ticket: Ticket }) => {
           <OpenCardButton setState={toggleOpenCard} />
         </div>
       </div>
-      {/* {isOpen && (
+      {isOpen && (
         <div className="py-4">
           <ul className="flex flex-col gap-4">
             {ticket.ticketItems.map((e, idx) => {
@@ -59,7 +59,7 @@ const TicketCard = ({ ticket }: { ticket: Ticket }) => {
             })}
           </ul>
         </div>
-      )} */}
+      )}
     </li>
   );
 };
