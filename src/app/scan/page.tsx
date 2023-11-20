@@ -11,7 +11,10 @@ const Page = () => {
   const [ticket, setTicket] = useState<Ticket | null>(null);
 
   const onSuccess = useCallback(async (result: QrcodeResult) => {
-    const response = await scanTicket(result.text);
+    const rawHtml = await fetch(result.text);
+    const ticketHtml = await rawHtml.text();
+
+    const response = await scanTicket(result.text, ticketHtml);
 
     console.log({ response });
 

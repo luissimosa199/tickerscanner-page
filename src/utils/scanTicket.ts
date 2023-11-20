@@ -4,11 +4,8 @@ import { cookies } from "next/headers";
 
 const TICKER_APP_URL = process.env.NEXT_PUBLIC_TICKER_APP_URL as string;
 
-export const scanTicket = async (url: string) => {
+export const scanTicket = async (url: string, ticketHtml: string) => {
   try {
-    const rawHtml = await fetch(url);
-    const ticketHtml = await rawHtml.text();
-
     const useCookies = cookies();
     const token = useCookies.get("token");
 
@@ -35,14 +32,6 @@ export const scanTicket = async (url: string) => {
         success: false,
         error: response.statusText,
         message: "Unauthorized",
-      };
-    }
-
-    if (response.status !== 200) {
-      return {
-        success: false,
-        error: response.statusText,
-        message: "Error",
       };
     }
 
