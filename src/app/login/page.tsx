@@ -60,7 +60,7 @@ const Login = () => {
           />
 
           <button
-            className="bg-white rounded-full px-6 py-4 w-2/3 text-red-500 text-center text-lg font-bold mt-12"
+            className="bg-white rounded-full px-6 py-4 w-2/3 sm:max-w-xs text-red-500 text-center text-lg font-bold mt-12"
             type="submit"
             disabled={pending}
           >

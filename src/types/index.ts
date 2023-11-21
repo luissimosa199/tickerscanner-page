@@ -5,8 +5,8 @@ interface TicketItem {
   total: number;
 }
 
-interface Discount {
-  disc_items: any[];
+export interface Discount {
+  disc_items: { desc_name: string; desc_amount: number }[];
   disc_total: number;
 }
 
