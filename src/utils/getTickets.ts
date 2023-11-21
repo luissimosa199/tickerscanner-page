@@ -19,9 +19,9 @@ export const getTickets = async () => {
     return;
   }
 
-  const data = await response.json().catch((error) => {
+  const data = (await response.json().catch((error) => {
     throw new Error(error);
-  }) as Ticket[];
+  })) as Ticket[];
 
-  return data
+  return data.reverse();
 };
