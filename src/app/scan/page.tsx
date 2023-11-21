@@ -50,12 +50,9 @@ const Page = () => {
             ></div>
           </div>
           <div className="flex justify-center w-full px-24">
-            <button
-              onClick={() => console.log("hey")}
-              className="bg-white rounded-full px-6 py-4 w-full text-red-500 text-center text-lg font-bold"
-            >
+            <div className="bg-white rounded-full px-6 py-4 w-full sm:max-w-xs text-red-500 text-center text-lg font-bold">
               Escanea
-            </button>
+            </div>
           </div>
           <p className="text-red-900 font-semibold text-sm">
             Desarrollado por Luis Simosa, 2023
