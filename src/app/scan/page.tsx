@@ -4,7 +4,7 @@ import { Html5QrcodeError, QrcodeResult } from "html5-qrcode/esm/core";
 import useScanner from "@/hooks/useScanner";
 import { scanTicket } from "@/utils/scanTicket";
 import { Ticket } from "@/types";
-import OneTicketView from "@/component/OneTicketCard";
+import OneTicketView from "@/components/OneTicketCard";
 import Link from "next/link";
 
 const Page = () => {

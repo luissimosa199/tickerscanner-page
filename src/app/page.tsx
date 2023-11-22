@@ -1,5 +1,5 @@
-import LoginLink from "@/component/LoginLink";
-import QrLogo from "@/component/QrLogo";
+import LoginLink from "@/components/LoginLink";
+import QrLogo from "@/components/QrLogo";
 import Link from "next/link";
 
 export default function Home() {

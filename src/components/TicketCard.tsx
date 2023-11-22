@@ -1,14 +1,18 @@
 "use client";
 
 import { Ticket } from "@/types";
-import React, { useState } from "react";
+import { useState } from "react";
 import TicketCardMainSection from "./TicketCardMainSection";
 
-const TicketCard = ({ ticket }: { ticket: Ticket }) => {
+const TicketComponent = ({ ticket }: { ticket: Ticket }) => {
   const [isOpen, toggleOpenCard] = useState<boolean>(false);
 
   return (
-    <li className="bg-gray-100 m-2 p-4 rounded-3xl">
+    <li
+      className={`m-2 bg-gray-100 p-4 rounded-3xl  ${
+        isOpen ? "md:w-full md:mx-10" : "md:min-w-[45%]"
+      } `}
+    >
       <TicketCardMainSection
         ticket={ticket}
         toggleOpenCard={toggleOpenCard}
@@ -37,33 +41,36 @@ const TicketCard = ({ ticket }: { ticket: Ticket }) => {
             })}
           </ul>
 
-          <div className="mt-4">
-            <p className="text-base text-gray-600 font-semibold">
+          {ticket.discounts.disc_items.length > 0 && (
+            <ul className="mt-4">
+              <p className="text-sm font-semibold">Descuentos</p>
+              {ticket.discounts.disc_items.map(
+                (e: { desc_name: string; desc_amount: number }, idx) => {
+                  return (
+                    <li
+                      key={idx}
+                      className="flex gap-2"
+                    >
+                      <span className="text-sm text-gray-500 font-semibold">
+                        {e.desc_name}:
+                      </span>
+                      <span className="text-sm text-gray-500 font-semibold">
+                        ${e.desc_amount}
+                      </span>
+                    </li>
+                  );
+                }
+              )}
+            </ul>
+          )}
+
+          <div className="mt-4 text-center">
+            <p className="text-base font-semibold">
               Total: ${ticket.totalAmount}
             </p>
-            <p className="text-base text-gray-600 font-semibold">
+            <p className="text-base font-semibold">
               Descuento total: ${ticket.discounts.disc_total}
             </p>
-            <ul>
-              {ticket.discounts.disc_items.length > 0 &&
-                ticket.discounts.disc_items.map(
-                  (e: { desc_name: string; desc_amount: number }, idx) => {
-                    return (
-                      <li
-                        key={idx}
-                        className="flex gap-2 ml-2"
-                      >
-                        <span className="text-xs text-gray-500 font-semibold">
-                          {e.desc_name}:
-                        </span>
-                        <span className="text-xs text-gray-500 font-semibold">
-                          ${e.desc_amount}
-                        </span>
-                      </li>
-                    );
-                  }
-                )}
-            </ul>
           </div>
         </div>
       )}
@@ -71,4 +78,4 @@ const TicketCard = ({ ticket }: { ticket: Ticket }) => {
   );
 };
 
-export default TicketCard;
+export default TicketComponent;

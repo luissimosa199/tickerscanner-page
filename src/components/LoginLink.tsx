@@ -7,7 +7,7 @@ const LoginLink = () => {
 
   return (
     <Link
-      href="/login"
+      href={isLogged ? "/dashboard" : "/login"}
       className="text-gray-200 font-semibold"
     >
       {isLogged ? "Mis tickets" : "Ingresar"}
