@@ -1,5 +1,6 @@
 {
   "name": "ticker-scanner-page",
+  "theme": "#ef4444",
   "icons": [
     {
       "src": "/android-icon-36x36.png",

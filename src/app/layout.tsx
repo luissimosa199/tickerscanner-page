@@ -7,6 +7,7 @@ const inter = Inter({ subsets: ["latin"] });
 export const metadata: Metadata = {
   title: "TickerScanner",
   description: "Analiza tus facturas de supermercado",
+  icons: "/favicon.ico",
 };
 
 export default function RootLayout({
