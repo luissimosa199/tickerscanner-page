@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 
@@ -8,6 +8,10 @@ export const metadata: Metadata = {
   title: "TickerScanner",
   description: "Analiza tus facturas de supermercado",
   icons: "/favicon.ico",
+};
+
+export const viewport: Viewport = {
+  themeColor: "#ef4444",
 };
 
 export default function RootLayout({
