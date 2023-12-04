@@ -4,13 +4,17 @@ import { cookies } from "next/headers";
 
 const TICKER_APP_URL = process.env.NEXT_PUBLIC_TICKER_APP_URL as string;
 
-export const scanTicket = async (url: string, ticketHtml: string) => {
+export const scanTicket = async (
+  url: string,
+  ticketHtml: string,
+  supermarket: "DISCO" | "EASY" | "JUMBO"
+) => {
   try {
     const useCookies = cookies();
     const token = useCookies.get("token");
 
     const body = {
-      supermarket: "DISCO",
+      supermarket,
       rawTicketHTML: ticketHtml,
       ogTicketUrl: url,
     };
@@ -34,8 +38,6 @@ export const scanTicket = async (url: string, ticketHtml: string) => {
         message: "Unauthorized",
       };
     }
-
-    console.log({ response });
 
     // TODO: handle conflict error (duplicate)
 

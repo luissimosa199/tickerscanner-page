@@ -1,55 +1,35 @@
 "use client";
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useState } from "react";
 import { Html5QrcodeError, QrcodeResult } from "html5-qrcode/esm/core";
 import useScanner from "@/hooks/useScanner";
 import { scanTicket } from "@/utils/scanTicket";
-import { Ticket } from "@/types";
+import { Supermarket, Ticket } from "@/types";
 import OneTicketView from "@/components/OneTicketCard";
 import Link from "next/link";
+import { getStringAfterLogo } from "@/utils/getSupermarketFromLogo";
 
 const Page = () => {
-  const mockTicket = {
-    _id: "12345",
-    ticketItems: [
-      {
-        name: "Articulo 1",
-        quantity: 1,
-        price: 1500,
-        total: 1500,
-      },
-      {
-        name: "Articulo 2",
-        quantity: 1,
-        price: 1500,
-        total: 1500,
-      },
-      {
-        name: "Articulo 3",
-        quantity: 1,
-        price: 1500,
-        total: 1500,
-      },
-    ],
-    totalAmount: 43000,
-    logoLink: "/ms-icon-144x144.png",
-    address: "address",
-    date: "11/12/2023",
-    discounts: {
-      disc_items: [{ desc_name: "desc 1", desc_amount: 120 }],
-      disc_total: 120,
-    },
-
-    paymentMethod: "payment method",
-    ogTicketUrl: "https://example.com",
-    supermarket: "DISCO" as const,
-  };
-  const [ticket, setTicket] = useState<Ticket | null>(mockTicket);
+  const [ticket, setTicket] = useState<Ticket | null>(null);
 
   const onSuccess = useCallback(async (result: QrcodeResult) => {
     const rawHtml = await fetch(result.text);
+
+    const isCencosud = rawHtml.url.startsWith(
+      "https://mifactura.napse.global/"
+    );
+
     const ticketHtml = await rawHtml.text();
 
-    const response = await scanTicket(result.text, ticketHtml);
+    const DISCO = getStringAfterLogo(ticketHtml).includes("disco") && "DISCO";
+    const EASY = getStringAfterLogo(ticketHtml).includes("easy") && "EASY";
+    const JUMBO = getStringAfterLogo(ticketHtml).includes("jumbo") && "JUMBO";
+
+    const supermarket =
+      DISCO || EASY || (JUMBO as Supermarket[keyof Supermarket]);
+
+    console.log(supermarket);
+
+    const response = await scanTicket(result.text, ticketHtml, supermarket);
 
     setTicket(response);
   }, []);
