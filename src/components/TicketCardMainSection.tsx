@@ -24,7 +24,7 @@ const TicketCardMainSection = ({
       </div>
       <div className="">
         <p className="font-bold">
-          {ticket.supermarket} {ticket.date}
+          {ticket.supermarket.toString()} {ticket.date}
         </p>
 
         <p className="text-gray-400 font-semibold text-sm">
