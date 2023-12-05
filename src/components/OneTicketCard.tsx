@@ -15,7 +15,7 @@ const OneTicketView = ({ ticket }: { ticket: Ticket }) => {
         </div>
         <div className="">
           <p className="font-bold text-xl">
-            {ticket.supermarket} {ticket.date}
+            {ticket.supermarket.toString()} {ticket.date}
           </p>
 
           <p className="text-gray-400 font-semibold text-lg">
