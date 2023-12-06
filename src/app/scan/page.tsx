@@ -3,7 +3,7 @@ import React, { useCallback, useState } from "react";
 import { Html5QrcodeError, QrcodeResult } from "html5-qrcode/esm/core";
 import useScanner from "@/hooks/useScanner";
 import { scanTicket } from "@/utils/scanTicket";
-import { Supermarket, Ticket } from "@/types";
+import { Ticket } from "@/types";
 import OneTicketView from "@/components/OneTicketCard";
 import Link from "next/link";
 import { getStringAfterLogo } from "@/utils/getSupermarketFromLogo";
@@ -24,14 +24,23 @@ const Page = () => {
     const EASY = getStringAfterLogo(ticketHtml).includes("easy") && "EASY";
     const JUMBO = getStringAfterLogo(ticketHtml).includes("jumbo") && "JUMBO";
 
-    const supermarket =
-      DISCO || EASY || (JUMBO as Supermarket[keyof Supermarket]);
+    const supermarket = DISCO || EASY || JUMBO;
 
-    console.log(supermarket);
+    if (!supermarket) {
+      console.error("super market error");
+      return;
+    }
 
-    const response = await scanTicket(result.text, ticketHtml, supermarket);
-
-    setTicket(response);
+    try {
+      const response = await scanTicket(result.text, ticketHtml, supermarket);
+      if (response.success) {
+        setTicket(response);
+      }
+      console.error(response.statusText);
+      return;
+    } catch (error) {
+      console.error(error);
+    }
   }, []);
 
   const onError = useCallback((error: Html5QrcodeError) => {

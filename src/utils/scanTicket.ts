@@ -39,6 +39,14 @@ export const scanTicket = async (
       };
     }
 
+    if (!response.ok) {
+      return {
+        success: false,
+        error: response.statusText,
+        message: `Error ${response.status}`,
+      };
+    }
+
     // TODO: handle conflict error (duplicate)
 
     return response.json();
