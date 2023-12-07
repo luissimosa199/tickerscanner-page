@@ -33,10 +33,9 @@ const Page = () => {
 
     try {
       const response = await scanTicket(result.text, ticketHtml, supermarket);
-      if (response.success) {
-        setTicket(response);
-      }
-      console.error(response.statusText);
+
+      setTicket(response);
+
       return;
     } catch (error) {
       console.error(error);

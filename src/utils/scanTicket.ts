@@ -43,13 +43,13 @@ export const scanTicket = async (
       return {
         success: false,
         error: response.statusText,
-        message: `Error ${response.status}`,
+        message: `Error ${response}`,
       };
     }
 
     // TODO: handle conflict error (duplicate)
 
-    return response.json();
+    return await response.json();
   } catch (error) {
     throw new Error(JSON.stringify(error));
   }
