@@ -18,8 +18,8 @@ const TicketCardMainSection = ({
         <Image
           alt={`${ticket.supermarket} logo`}
           src={ticket.logoLink}
-          width={96}
-          height={96}
+          width={120}
+          height={120}
         />
       </div>
       <div className="">
