@@ -1,6 +1,5 @@
 import DashboardBody from "@/components/DashboardBody";
 import FloatingButton from "@/components/FloatingButton";
-import TicketComponent from "@/components/TicketCard";
 import { Ticket } from "@/types";
 import { getTickets } from "@/utils/getTickets";
 import { cookies } from "next/headers";

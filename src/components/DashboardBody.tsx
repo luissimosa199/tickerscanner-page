@@ -3,7 +3,7 @@
 import { Ticket } from "@/types";
 import React, { useState } from "react";
 import DashboardHeader from "./DashboardHeader";
-import DashboardTicketsList from "./DashboardTicketsList";
+import DashboardContent from "./DashboardContent";
 
 const DashboardBody = ({ tickets }: { tickets: Ticket[] }) => {
   const [tab, setTab] = useState<"TICKETS" | "ARTICULOS">("TICKETS");
@@ -14,7 +14,7 @@ const DashboardBody = ({ tickets }: { tickets: Ticket[] }) => {
         tab={tab}
         setTab={setTab}
       />
-      <DashboardTicketsList
+      <DashboardContent
         tickets={tickets}
         tab={tab}
       />
