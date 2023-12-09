@@ -27,3 +27,15 @@ export interface LoginFormValues {
   email: string;
   password: string;
 }
+
+export interface SearchResultItem {
+  name: string;
+  quantity: number;
+  price: number;
+  total: number;
+  logoLink: string;
+  date: string;
+  ogTicketUrl: string;
+  supermarket: string;
+  ticketId: string;
+}

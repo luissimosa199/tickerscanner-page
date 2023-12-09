@@ -12,8 +12,8 @@ const DashboardHeader = ({
       <div className="p-4 flex flex-col gap-4">
         <h1 className="text-4xl font-bold text-white text-center">Tickets</h1>
         <p className="text-gray-300 text-center">
-          Acá encontrarás todos tus tickets organizados en base a la fecha que
-          los escaneaste
+          Acá encontrarás todos tus tickets y podras buscar individualmente tus
+          productos.
         </p>
       </div>
 
