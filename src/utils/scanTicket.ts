@@ -7,7 +7,7 @@ const TICKER_APP_URL = process.env.NEXT_PUBLIC_TICKER_APP_URL as string;
 export const scanTicket = async (
   url: string,
   ticketHtml: string,
-  supermarket: "DISCO" | "EASY" | "JUMBO"
+  supermarket: "DISCO" | "EASY" | "JUMBO" | "COTO"
 ) => {
   try {
     const useCookies = cookies();

@@ -7,6 +7,7 @@ import { Ticket } from "@/types";
 import OneTicketView from "@/components/OneTicketCard";
 import Link from "next/link";
 import { getStringAfterLogo } from "@/utils/getSupermarketFromLogo";
+import OneTicketButtons from "@/components/OneTicketButtons";
 
 const Page = () => {
   const [ticket, setTicket] = useState<Ticket | null>(null);
@@ -23,8 +24,9 @@ const Page = () => {
     const DISCO = getStringAfterLogo(ticketHtml).includes("disco") && "DISCO";
     const EASY = getStringAfterLogo(ticketHtml).includes("easy") && "EASY";
     const JUMBO = getStringAfterLogo(ticketHtml).includes("jumbo") && "JUMBO";
+    const COTO = result.text.includes("coto") && "COTO";
 
-    const supermarket = DISCO || EASY || JUMBO;
+    const supermarket = DISCO || EASY || JUMBO || COTO;
 
     if (!supermarket) {
       console.error("super market error");
@@ -33,9 +35,7 @@ const Page = () => {
 
     try {
       const response = await scanTicket(result.text, ticketHtml, supermarket);
-
       setTicket(response);
-
       return;
     } catch (error) {
       console.error(error);
@@ -47,6 +47,40 @@ const Page = () => {
   }, []);
 
   const previewRef = useScanner(onSuccess, onError);
+
+  // const fakeTicket: Ticket = {
+  //   _id: "1234abc",
+  //   ticketItems: [
+  //     {
+  //       name: "Apples",
+  //       quantity: 2,
+  //       price: 1.99,
+  //       total: 3.98,
+  //     },
+  //     {
+  //       name: "Milk",
+  //       quantity: 1,
+  //       price: 2.49,
+  //       total: 2.49,
+  //     },
+  //   ],
+  //   totalAmount: 6.47,
+  //   logoLink: "",
+  //   address: "123 Main St, Anytown, USA",
+  //   date: "2023-01-06T12:30:00.000Z",
+  //   discounts: {
+  //     disc_items: [
+  //       {
+  //         desc_name: "New Customer Discount",
+  //         desc_amount: 0.5,
+  //       },
+  //     ],
+  //     disc_total: 0.5,
+  //   },
+  //   paymentMethod: "Credit Card",
+  //   ogTicketUrl: "https://examplesupermarket.com/receipts/1234abc",
+  //   supermarket: "JUMBO",
+  // };
 
   return (
     <main className="bg-red-500">
@@ -86,6 +120,7 @@ const Page = () => {
       {ticket && (
         <div className="min-h-screen flex flex-col pt-4 px-4 justify-between items-center">
           <OneTicketView ticket={ticket} />
+          <OneTicketButtons />
         </div>
       )}
     </main>
