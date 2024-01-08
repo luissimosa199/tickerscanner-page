@@ -1,52 +1,13 @@
 "use client";
-import React, { useCallback, useState } from "react";
-import { Html5QrcodeError, QrcodeResult } from "html5-qrcode/esm/core";
-import useScanner from "@/hooks/useScanner";
-import { scanTicket } from "@/utils/scanTicket";
-import { Ticket } from "@/types";
+import React, { useState } from "react";
 import OneTicketView from "@/components/OneTicketCard";
 import Link from "next/link";
-import { getStringAfterLogo } from "@/utils/getSupermarketFromLogo";
 import OneTicketButtons from "@/components/OneTicketButtons";
+import useTicketParser from "@/hooks/useTicketParser";
 
 const Page = () => {
-  const [ticket, setTicket] = useState<Ticket | null>(null);
-
-  const onSuccess = useCallback(async (result: QrcodeResult) => {
-    const rawHtml = await fetch(result.text);
-
-    const isCencosud = rawHtml.url.startsWith(
-      "https://mifactura.napse.global/"
-    );
-
-    const ticketHtml = await rawHtml.text();
-
-    const DISCO = getStringAfterLogo(ticketHtml).includes("disco") && "DISCO";
-    const EASY = getStringAfterLogo(ticketHtml).includes("easy") && "EASY";
-    const JUMBO = getStringAfterLogo(ticketHtml).includes("jumbo") && "JUMBO";
-    const COTO = result.text.includes("coto") && "COTO";
-
-    const supermarket = DISCO || EASY || JUMBO || COTO;
-
-    if (!supermarket) {
-      console.error("super market error");
-      return;
-    }
-
-    try {
-      const response = await scanTicket(result.text, ticketHtml, supermarket);
-      setTicket(response);
-      return;
-    } catch (error) {
-      console.error(error);
-    }
-  }, []);
-
-  const onError = useCallback((error: Html5QrcodeError) => {
-    return;
-  }, []);
-
-  const previewRef = useScanner(onSuccess, onError);
+  const [showTextInput, setShowTextInput] = useState<boolean>(false);
+  const { ticket, handleSubmit, previewRef } = useTicketParser();
 
   // const fakeTicket: Ticket = {
   //   _id: "1234abc",
@@ -105,9 +66,24 @@ const Page = () => {
             ></div>
           </div>
           <div className="flex justify-center w-full px-24">
-            <div className="bg-white rounded-full px-6 py-4 w-full sm:max-w-xs text-red-500 text-center text-lg font-bold">
-              Escanea
-            </div>
+            {showTextInput ? (
+              <form onSubmit={handleSubmit}>
+                <input
+                  name="url"
+                  className="bg-white rounded-full px-6 py-4 w-full sm:max-w-xs text-red-500 text-center text-lg font-bold"
+                  type="text"
+                />
+              </form>
+            ) : (
+              <button
+                onClick={() => {
+                  setShowTextInput(true);
+                }}
+                className="bg-white rounded-full px-6 py-4 w-full sm:max-w-xs text-red-500 text-center text-lg font-bold"
+              >
+                Introducir URL
+              </button>
+            )}
           </div>
           <p className="text-red-900 font-semibold text-sm">
             Desarrollado por Luis Simosa, 2023

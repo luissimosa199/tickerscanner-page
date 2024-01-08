@@ -39,15 +39,23 @@ export const scanTicket = async (
       };
     }
 
+    // TODO: handle conflict error (duplicate)
+    if (response.status === 409) {
+      return {
+        success: false,
+        data: { _id: 123 },
+        error: response.statusText,
+        message: `Error ${JSON.stringify(response)}`,
+      };
+    }
+
     if (!response.ok) {
       return {
         success: false,
         error: response.statusText,
-        message: `Error ${response}`,
+        message: `Error ${JSON.stringify(response)}`,
       };
     }
-
-    // TODO: handle conflict error (duplicate)
 
     return await response.json();
   } catch (error) {

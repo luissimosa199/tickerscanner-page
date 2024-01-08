@@ -13,7 +13,7 @@ const Loading = () => {
         <div className="flex justify-center w-full px-24">
           <button
             disabled
-            className="bg-white rounded-full px-6 py-4 w-full text-red-500 text-center text-lg font-bold"
+            className="bg-white rounded-full px-6 py-4 w-full text-red-500 text-center text-lg font-bold sm:max-w-xs"
           >
             Escanea
           </button>

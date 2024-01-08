@@ -20,7 +20,7 @@ export interface Ticket {
   discounts: Discount;
   paymentMethod: string;
   ogTicketUrl: string;
-  supermarket: "DISCO" | "JUMBO" | "EASY";
+  supermarket: "DISCO" | "JUMBO" | "EASY" | "COTO";
 }
 
 export interface LoginFormValues {
