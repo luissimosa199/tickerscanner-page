@@ -6,6 +6,10 @@ const nextConfig = {
         protocol: "https",
         hostname: "media.easy.com.ar",
       },
+      {
+        protocol: "https",
+        hostname: "res.cloudinary.com",
+      },
     ],
   },
 };
