@@ -39,13 +39,15 @@ export const scanTicket = async (
       };
     }
 
-    // TODO: handle conflict error (duplicate)
     if (response.status === 409) {
+      const data = await response.json();
+      const errorData = JSON.parse(data.message);
+      const statusCode = data.statusCode;
       return {
         success: false,
-        data: { _id: 123 },
+        data: { _id: errorData._id },
         error: response.statusText,
-        message: `Error ${JSON.stringify(response)}`,
+        message: `Error ${errorData.message}`,
       };
     }
 

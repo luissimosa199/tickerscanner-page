@@ -1,4 +1,5 @@
 import { Ticket } from "@/types";
+import { calculateTotalQuantity } from "@/utils/calculateTotalQuantity";
 import Image from "next/image";
 
 const OneTicketView = ({ ticket }: { ticket: Ticket }) => {
@@ -22,7 +23,7 @@ const OneTicketView = ({ ticket }: { ticket: Ticket }) => {
             ${ticket.totalAmount}
           </p>
           <p className="text-gray-400 font-semibold text-lg">
-            {ticket.ticketItems.length} artículos
+            {calculateTotalQuantity(ticket.ticketItems)} artículos
           </p>
         </div>
       </div>

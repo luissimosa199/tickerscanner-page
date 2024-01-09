@@ -56,7 +56,7 @@ const useTicketParser = () => {
 
       if (!response.success) {
         if (response.error === "Conflict") {
-          router.push(`/duplicate-ticket?id=${response.data._id}`);
+          router.push(`/duplicate-ticket?_id=${response.data._id}`);
           return;
         }
         router.push("/parsing-error");

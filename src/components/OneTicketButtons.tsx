@@ -11,7 +11,7 @@ const OneTicketButtons = () => {
         🔄 Escanear Otro
       </Link>
       <Link
-        href=""
+        href="/dashboard"
         className="bg-white rounded-full px-6 py-4 w-full sm:max-w-xs text-red-500 text-center text-lg font-bold"
       >
         ✅ Mis tickets

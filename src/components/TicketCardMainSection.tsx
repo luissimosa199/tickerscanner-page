@@ -4,6 +4,7 @@ import { Ticket } from "@/types";
 import Image from "next/image";
 import React from "react";
 import OpenCardButton from "./OpenCardButton";
+import { calculateTotalQuantity } from "@/utils/calculateTotalQuantity";
 
 const TicketCardMainSection = ({
   ticket,
@@ -31,7 +32,7 @@ const TicketCardMainSection = ({
           ${ticket.totalAmount}
         </p>
         <p className="text-gray-400 font-semibold text-sm">
-          {ticket.ticketItems.length} artículos
+          {calculateTotalQuantity(ticket.ticketItems)} artículos
         </p>
       </div>
       <div className="w-6 h-6 ml-auto self-center flex justify-center items-center rounded-full bg-white p-4 shadow-md">
