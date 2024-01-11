@@ -59,7 +59,7 @@ export const scanTicket = async (
       };
     }
 
-    return await response.json();
+    return response.json();
   } catch (error) {
     throw new Error(JSON.stringify(error));
   }

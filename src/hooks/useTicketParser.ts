@@ -59,8 +59,9 @@ const useTicketParser = () => {
           router.push(`/duplicate-ticket?_id=${response.data._id}`);
           return;
         }
-        router.push("/parsing-error");
-        return;
+        // console.log(response);
+        // router.push("/parsing-error");
+        // return;
       }
       setTicket(response);
       return;
