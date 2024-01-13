@@ -18,9 +18,18 @@ const useTicketParser = () => {
         rawHtml = await fetch(url);
       } catch (err) {
         console.log("CORS error, trying another endpoint", err);
-        rawHtml = await fetch(
-          `${process.env.NEXT_PUBLIC_TICKER_APP_URL}/fetch-html?url=${url}`
-        );
+        const newResponse = await fetch(
+          `${process.env.NEXT_PUBLIC_TICKER_APP_URL}/fetch-html?url=${url}`,
+          {
+            headers: {
+              accept: "text/html",
+            },
+          }
+        ); // failing
+
+        console.log(newResponse);
+
+        rawHtml = newResponse;
       }
 
       const ticketHtml = await rawHtml.text();
@@ -70,7 +79,20 @@ const useTicketParser = () => {
     }
   };
 
-  const onSuccess = useCallback(async (result: QrcodeResult) => {
+  // const onSuccess = useCallback(async (result: QrcodeResult) => {
+  //   try {
+  //     const response = await requestHtml(result.text);
+  //     if (response) {
+  //       const { ticketHtml, supermarket } = response;
+  //       parseTicket(result.text, ticketHtml, supermarket);
+  //     }
+  //   } catch (err) {
+  //     console.log("onSuccess", err);
+  //   }
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, []);
+
+  const onSuccess = async (result: QrcodeResult) => {
     try {
       const response = await requestHtml(result.text);
       if (response) {
@@ -81,7 +103,7 @@ const useTicketParser = () => {
       console.log("onSuccess", err);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  };
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -90,7 +112,7 @@ const useTicketParser = () => {
     const url = urlInput.value;
 
     try {
-      const response = await requestHtml(url);
+      const response = await requestHtml(url); //working just fine
       if (response) {
         const { ticketHtml, supermarket } = response;
         await parseTicket(url, ticketHtml, supermarket);
