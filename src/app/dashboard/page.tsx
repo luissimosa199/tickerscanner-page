@@ -1,6 +1,6 @@
 import DashboardBody from "@/components/DashboardBody";
 import FloatingButton from "@/components/FloatingButton";
-import { Ticket } from "@/types";
+import { TicketsRequest } from "@/types";
 import { getTickets } from "@/utils/getTickets";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
@@ -14,8 +14,7 @@ const Dashboard = async () => {
     redirect("/login");
   }
 
-  // TODO: GET USER DATA
-  const tickets = (await getTickets()) as Ticket[];
+  const { tickets } = (await getTickets(1, 10)) as TicketsRequest;
 
   return (
     <main className="bg-red-500 relative">

@@ -39,3 +39,10 @@ export interface SearchResultItem {
   supermarket: string;
   ticketId: string;
 }
+
+export interface TicketsRequest {
+  tickets: Ticket[];
+  total: number;
+  page: number;
+  limit: number;
+}
