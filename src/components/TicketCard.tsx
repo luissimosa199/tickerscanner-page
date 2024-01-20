@@ -20,7 +20,7 @@ const TicketComponent = ({ ticket }: { ticket: Ticket }) => {
       {isOpen && (
         <div className="py-4">
           <ul className="flex flex-col gap-4">
-            {ticket.ticketItems.map((e, idx) => {
+            {ticket.ticket_items.map((e, idx) => {
               return (
                 <li
                   key={`${e.name}${idx}`}
@@ -41,10 +41,10 @@ const TicketComponent = ({ ticket }: { ticket: Ticket }) => {
             })}
           </ul>
 
-          {ticket.discounts.disc_items.length > 0 && (
+          {ticket.discount.disc_items.length > 0 && (
             <ul className="mt-4">
               <p className="text-sm font-semibold">Descuentos</p>
-              {ticket.discounts.disc_items.map(
+              {ticket.discount.disc_items.map(
                 (e: { desc_name: string; desc_amount: number }, idx) => {
                   return (
                     <li
@@ -66,10 +66,10 @@ const TicketComponent = ({ ticket }: { ticket: Ticket }) => {
 
           <div className="mt-4 text-center">
             <p className="text-base font-semibold">
-              Total: ${ticket.totalAmount}
+              Total: ${ticket.total_amount}
             </p>
             <p className="text-base font-semibold">
-              Descuento total: ${ticket.discounts.disc_total}
+              Descuento total: ${ticket.discount.disc_total}
             </p>
           </div>
         </div>

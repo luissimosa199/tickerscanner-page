@@ -1,39 +1,59 @@
 "use client";
-import { login } from "@/utils/login";
-import Link from "next/link";
+import { handleUserSubmit } from "@/utils/handleUserSubmit";
 import { useRouter } from "next/navigation";
-import React, { useRef, useState } from "react";
-import { useFormStatus } from "react-dom";
+import React, { useEffect, useRef } from "react";
+import { useFormState, useFormStatus } from "react-dom";
 
-const Login = () => {
-  const [loginError, setLoginError] = useState<string | null>(null);
-  const { pending } = useFormStatus();
+const Register = () => {
   const formRef = useRef<HTMLFormElement | null>(null);
   const router = useRouter();
+  const initialState = {
+    success: false,
+    message: "",
+  };
 
-  const handleSubmit = async (formData: FormData) => {
-    const response = await login(formData);
+  const { pending } = useFormStatus();
+  const [state, formAction] = useFormState(handleUserSubmit, initialState);
 
-    if (!response.success && response.error) {
-      setLoginError(response.error);
-    } else {
-      router.push("/dashboard");
+  useEffect(() => {
+    let timeoutId: NodeJS.Timeout | null = null;
+
+    if (state.success) {
+      formRef.current?.reset();
+      timeoutId = setTimeout(() => {
+        router.push("/login");
+      }, 2000);
     }
 
-    formRef.current?.reset();
-  };
+    return () => {
+      if (timeoutId) {
+        clearTimeout(timeoutId);
+      }
+    };
+  }, [state, router]);
 
   return (
     <main className="bg-red-500">
       <section className="h-screen w-screen pt-4">
         <h1 className="font-bold text-2xl text-white text-center">
-          Ingresa tus datos
+          ¡Bienvenido!
         </h1>
         <form
-          ref={formRef}
           className="flex flex-col gap-2 justify-center items-center mt-6"
-          action={handleSubmit}
+          action={formAction}
         >
+          <label
+            htmlFor="name"
+            className="text-white capitalize"
+          >
+            nombre
+          </label>
+          <input
+            name="name"
+            id="name"
+            type="name"
+            className="rounded-full px-4 py-2"
+          />
           <label
             htmlFor="email"
             className="text-white capitalize"
@@ -51,7 +71,7 @@ const Login = () => {
             htmlFor="password"
             className="text-white capitalize"
           >
-            password
+            contraseña
           </label>
           <input
             name="password"
@@ -65,25 +85,16 @@ const Login = () => {
             type="submit"
             disabled={pending}
           >
-            {pending ? "Verificando..." : "Ingresar"}
+            {pending ? "Verificando..." : "Registrarme"}
           </button>
         </form>
 
-        <div className="mt-4 flex justify-center">
-          <Link
-            href="/register"
-            className="text-white text-lg text-center"
-          >
-            Registrarme
-          </Link>
-        </div>
-
         <div className="mt-4">
-          <p className="text-white text-2xl text-center">{loginError}</p>
+          <p className="text-white text-2xl text-center">{state.message}</p>
         </div>
       </section>
     </main>
   );
 };
 
-export default Login;
+export default Register;

@@ -11,15 +11,15 @@ export interface Discount {
 }
 
 export interface Ticket {
-  _id: string;
-  ticketItems: TicketItem[];
-  totalAmount: number;
-  logoLink: string;
+  id: string;
+  ticket_items: TicketItem[];
+  total_amount: number;
+  logo_link: string;
   address: string;
   date: string;
-  discounts: Discount;
-  paymentMethod: string;
-  ogTicketUrl: string;
+  discount: Discount;
+  payment_method: string;
+  og_ticket_url: string;
   supermarket: "DISCO" | "JUMBO" | "EASY" | "COTO";
 }
 
@@ -33,9 +33,9 @@ export interface SearchResultItem {
   quantity: number;
   price: number;
   total: number;
-  logoLink: string;
+  logo_link: string;
   date: string;
-  ogTicketUrl: string;
+  og_ticket_url: string;
   supermarket: string;
   ticketId: string;
 }
@@ -45,4 +45,5 @@ export interface TicketsRequest {
   total: number;
   page: number;
   limit: number;
+  error?: string;
 }

@@ -1,15 +1,17 @@
 import { Ticket } from "@/types";
 
 export function calculateTotalQuantity(
-  ticketItems: Ticket["ticketItems"]
+  ticket_items: Ticket["ticket_items"]
 ): number {
   const totalQuantity =
-    ticketItems.length === 1
+    ticket_items.length === 1
       ? 1
-      : ticketItems.reduce(
-          (total, ticketItem) =>
+      : ticket_items.reduce(
+          (total, ticket_items) =>
             total +
-            (Number.isInteger(ticketItem.quantity) ? ticketItem.quantity : 1),
+            (Number.isInteger(ticket_items.quantity)
+              ? ticket_items.quantity
+              : 1),
           0
         );
 

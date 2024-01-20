@@ -14,7 +14,12 @@ const Dashboard = async () => {
     redirect("/login");
   }
 
-  const { tickets } = (await getTickets(1, 10)) as TicketsRequest;
+  const { tickets, error } = (await getTickets(1, 10)) as TicketsRequest;
+
+  if (error) {
+    console.log(error);
+    redirect("/login");
+  }
 
   return (
     <main className="bg-red-500 relative">

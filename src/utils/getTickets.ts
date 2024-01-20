@@ -19,7 +19,9 @@ export const getTickets = async (page = 1, limit = 10) => {
 
   if (!response.ok) {
     console.log("error", response.statusText);
-    return;
+    return {
+      error: response.statusText,
+    };
   }
 
   const data = (await response.json().catch((error) => {

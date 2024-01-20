@@ -9,7 +9,7 @@ const OneTicketView = ({ ticket }: { ticket: Ticket }) => {
         <div className="h-36 w-36 rounded-3xl bg-white overflow-hidden">
           <Image
             alt={`${ticket.supermarket} logo`}
-            src={ticket.logoLink}
+            src={ticket.logo_link}
             width={144}
             height={144}
           />
@@ -20,17 +20,17 @@ const OneTicketView = ({ ticket }: { ticket: Ticket }) => {
           </p>
 
           <p className="text-gray-400 font-semibold text-lg">
-            ${ticket.totalAmount}
+            ${ticket.total_amount}
           </p>
           <p className="text-gray-400 font-semibold text-lg">
-            {calculateTotalQuantity(ticket.ticketItems)} artículos
+            {calculateTotalQuantity(ticket.ticket_items)} artículos
           </p>
         </div>
       </div>
 
       <div className="py-4">
         <ul className="flex flex-col gap-4">
-          {ticket.ticketItems.map((e, idx) => {
+          {ticket.ticket_items.map((e, idx) => {
             return (
               <li
                 key={`${e.name}${idx}`}
@@ -51,10 +51,10 @@ const OneTicketView = ({ ticket }: { ticket: Ticket }) => {
           })}
         </ul>
 
-        {ticket.discounts.disc_items.length > 0 && (
+        {ticket.discount.disc_items.length > 0 && (
           <ul className="mt-4">
             <p className="text-lg font-semibold">Descuentos</p>
-            {ticket.discounts.disc_items.map(
+            {ticket.discount.disc_items.map(
               (e: { desc_name: string; desc_amount: number }, idx) => {
                 return (
                   <li
@@ -75,9 +75,9 @@ const OneTicketView = ({ ticket }: { ticket: Ticket }) => {
         )}
 
         <div className="mt-4 text-center">
-          <p className="text-xl font-semibold">Total: ${ticket.totalAmount}</p>
+          <p className="text-xl font-semibold">Total: ${ticket.total_amount}</p>
           <p className="text-xl font-semibold">
-            Descuento total: ${ticket.discounts.disc_total}
+            Descuento total: ${ticket.discount.disc_total}
           </p>
         </div>
       </div>
