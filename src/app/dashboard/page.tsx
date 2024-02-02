@@ -23,7 +23,7 @@ const Dashboard = async () => {
 
   return (
     <main className="bg-red-500 relative">
-      <DashboardBody tickets={tickets} />
+      <DashboardBody tickets={tickets} error={error} />
       <div className="fixed bottom-5 right-5 w-16 h-16 bg-red-500 rounded-full shadow-md  flex justify-center items-center">
         <FloatingButton />
       </div>

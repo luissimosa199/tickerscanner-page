@@ -25,9 +25,7 @@ const useTicketParser = () => {
               accept: "text/html",
             },
           }
-        ); // failing
-
-        console.log(newResponse);
+        );
 
         rawHtml = newResponse;
       }
@@ -65,12 +63,10 @@ const useTicketParser = () => {
 
       if (!response.success) {
         if (response.error === "Conflict") {
+          // corregir en el back
           router.push(`/duplicate-ticket?_id=${response.data._id}`);
           return;
         }
-        // console.log(response);
-        // router.push("/parsing-error");
-        // return;
       }
       setTicket(response);
       return;
@@ -78,19 +74,6 @@ const useTicketParser = () => {
       console.error("parseTicket", error);
     }
   };
-
-  // const onSuccess = useCallback(async (result: QrcodeResult) => {
-  //   try {
-  //     const response = await requestHtml(result.text);
-  //     if (response) {
-  //       const { ticketHtml, supermarket } = response;
-  //       parseTicket(result.text, ticketHtml, supermarket);
-  //     }
-  //   } catch (err) {
-  //     console.log("onSuccess", err);
-  //   }
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, []);
 
   const onSuccess = async (result: QrcodeResult) => {
     try {
@@ -112,7 +95,7 @@ const useTicketParser = () => {
     const url = urlInput.value;
 
     try {
-      const response = await requestHtml(url); //working just fine
+      const response = await requestHtml(url);
       if (response) {
         const { ticketHtml, supermarket } = response;
         await parseTicket(url, ticketHtml, supermarket);

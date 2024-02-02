@@ -16,7 +16,7 @@ export const scanTicket = async (
     const body = {
       supermarket,
       rawTicketHTML: ticketHtml,
-      ogTicketUrl: url,
+      og_ticket_url: url,
     };
 
     const response = await fetch(
@@ -45,7 +45,7 @@ export const scanTicket = async (
       const statusCode = data.statusCode;
       return {
         success: false,
-        data: { _id: errorData._id },
+        data: { id: errorData.id },
         error: response.statusText,
         message: `Error ${errorData.message}`,
       };
@@ -59,7 +59,9 @@ export const scanTicket = async (
       };
     }
 
-    return response.json();
+    const data = await response.json();
+
+    return { success: true, ...data };
   } catch (error) {
     throw new Error(JSON.stringify(error));
   }

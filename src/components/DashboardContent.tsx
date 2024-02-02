@@ -6,13 +6,15 @@ import ItemsSection from "./ItemsSection";
 const DashboardContent = ({
   tickets,
   tab,
+  error,
 }: {
   tickets: Ticket[];
   tab: "ARTICULOS" | "TICKETS";
+  error: string | undefined;
 }) => {
   return (
     <section className="min-h-screen w-full pt-4 bg-white">
-      {tab === "TICKETS" && <TicketsSection tickets={tickets} />}
+      {tab === "TICKETS" && <TicketsSection error={error} tickets={tickets} />}
       {tab === "ARTICULOS" && <ItemsSection />}
     </section>
   );

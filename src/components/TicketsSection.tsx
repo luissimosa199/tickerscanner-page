@@ -3,7 +3,13 @@ import React, { Suspense } from "react";
 import TicketComponent from "./TicketCard";
 import InfiniteScrollTickets from "./InfiniteScrollTickets";
 
-const TicketsSection = ({ tickets }: { tickets: Ticket[] }) => {
+const TicketsSection = ({
+  tickets,
+  error,
+}: {
+  tickets: Ticket[];
+  error: string | undefined;
+}) => {
   return (
     <div>
       <ul className="p-4 mx-auto md:flex md:flex-wrap md:justify-center">
@@ -19,14 +25,18 @@ const TicketsSection = ({ tickets }: { tickets: Ticket[] }) => {
             );
           })}
         >
-          {tickets.map((ticket, idx) => {
-            return (
-              <TicketComponent
-                key={`ticket_card_${ticket.id}_${idx}`}
-                ticket={ticket}
-              />
-            );
-          })}
+          {error === "This user has no tickets yet." && (
+            <p>No has escaneado tu primera factura</p>
+          )}
+          {tickets &&
+            tickets.map((ticket, idx) => {
+              return (
+                <TicketComponent
+                  key={`ticket_card_${ticket.id}_${idx}`}
+                  ticket={ticket}
+                />
+              );
+            })}
         </Suspense>
 
         <InfiniteScrollTickets />

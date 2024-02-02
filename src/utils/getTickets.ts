@@ -24,6 +24,13 @@ export const getTickets = async (page = 1, limit = 10) => {
     };
   }
 
+  if (response.status === 204) {
+    console.log("error", response.statusText);
+    return {
+      error: response.statusText,
+    };
+  }
+
   const data = (await response.json().catch((error) => {
     throw new Error(error);
   })) as TicketsRequest;

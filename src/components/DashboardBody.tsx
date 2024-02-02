@@ -5,7 +5,13 @@ import React, { useState } from "react";
 import DashboardHeader from "./DashboardHeader";
 import DashboardContent from "./DashboardContent";
 
-const DashboardBody = ({ tickets }: { tickets: Ticket[] }) => {
+const DashboardBody = ({
+  tickets,
+  error,
+}: {
+  tickets: Ticket[];
+  error: string | undefined;
+}) => {
   const [tab, setTab] = useState<"TICKETS" | "ARTICULOS">("TICKETS");
 
   return (
@@ -17,6 +23,7 @@ const DashboardBody = ({ tickets }: { tickets: Ticket[] }) => {
       <DashboardContent
         tickets={tickets}
         tab={tab}
+        error={error}
       />
     </div>
   );

@@ -9,40 +9,6 @@ const Page = () => {
   const [showTextInput, setShowTextInput] = useState<boolean>(false);
   const { ticket, handleSubmit, previewRef } = useTicketParser();
 
-  // const fakeTicket: Ticket = {
-  //   _id: "1234abc",
-  //   ticketItems: [
-  //     {
-  //       name: "Apples",
-  //       quantity: 2,
-  //       price: 1.99,
-  //       total: 3.98,
-  //     },
-  //     {
-  //       name: "Milk",
-  //       quantity: 1,
-  //       price: 2.49,
-  //       total: 2.49,
-  //     },
-  //   ],
-  //   totalAmount: 6.47,
-  //   logoLink: "",
-  //   address: "123 Main St, Anytown, USA",
-  //   date: "2023-01-06T12:30:00.000Z",
-  //   discounts: {
-  //     disc_items: [
-  //       {
-  //         desc_name: "New Customer Discount",
-  //         desc_amount: 0.5,
-  //       },
-  //     ],
-  //     disc_total: 0.5,
-  //   },
-  //   paymentMethod: "Credit Card",
-  //   ogTicketUrl: "https://examplesupermarket.com/receipts/1234abc",
-  //   supermarket: "JUMBO",
-  // };
-
   return (
     <main className="bg-red-500">
       {/* stage 1 */}
