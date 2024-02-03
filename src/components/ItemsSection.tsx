@@ -7,7 +7,7 @@ const ItemsSection = () => {
   const { term, setTerm, results, isLoading } = useDebouncedSearch();
 
   return (
-    <div className="p-4 mx-auto md:flex md:flex-wrap md:justify-center">
+    <div className="p-4 mx-auto md:flex md:flex-col md:max-w-6xl md:flex-wrap md:justify-center md:items-center">
       <div>
         <input
           type="text"
@@ -19,7 +19,7 @@ const ItemsSection = () => {
           value={term}
         />
       </div>
-      <ul>
+      <ul className="md:flex md:flex-wrap md:justify-center ">
         {isLoading && <ItemCardSkeleton />}
         {!isLoading &&
           results &&

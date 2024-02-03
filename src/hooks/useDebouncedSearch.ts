@@ -5,7 +5,7 @@ const useDebouncedSearch = (initialTerm = "") => {
   const [term, setTerm] = useState(initialTerm);
   const [results, setResults] = useState<SearchResultItem[] | null>(null);
   const [isLoading, setIsLoading] = useState(false);
-  const lastSearch = useRef(Date.now());
+  const lastSearch = useRef(0); // Change to 0 to allow immediate search on input
 
   useEffect(() => {
     const fetchResults = async () => {
@@ -23,13 +23,17 @@ const useDebouncedSearch = (initialTerm = "") => {
 
     const delay = 1500;
 
-    if (Date.now() - lastSearch.current > delay) {
+    // Check if the term is not empty before triggering the initial search
+    if (term && Date.now() - lastSearch.current >= delay) {
       lastSearch.current = Date.now();
       fetchResults();
     } else {
       const timeoutId = setTimeout(() => {
-        lastSearch.current = Date.now();
-        fetchResults();
+        // Check if the term is not empty before triggering the delayed search
+        if (term) {
+          lastSearch.current = Date.now();
+          fetchResults();
+        }
       }, delay);
 
       return () => {
