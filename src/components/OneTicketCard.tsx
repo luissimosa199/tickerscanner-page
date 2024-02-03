@@ -52,10 +52,10 @@ const OneTicketView = ({ ticket }: { ticket: Ticket }) => {
           })}
         </ul>
 
-        {ticket.discount.disc_items.length > 0 && (
+        {ticket.discount.desc_items.length > 0 && (
           <ul className="mt-4">
             <p className="text-lg font-semibold">Descuentos</p>
-            {ticket.discount.disc_items.map(
+            {ticket.discount.desc_items.map(
               (e: { desc_name: string; desc_amount: number }, idx) => {
                 return (
                   <li
@@ -78,7 +78,7 @@ const OneTicketView = ({ ticket }: { ticket: Ticket }) => {
         <div className="mt-4 text-center">
           <p className="text-xl font-semibold">Total: ${ticket.total_amount}</p>
           <p className="text-xl font-semibold">
-            Descuento total: ${ticket.discount.disc_total}
+            Descuento total: ${ticket.discount.desc_total}
           </p>
         </div>
       </div>
