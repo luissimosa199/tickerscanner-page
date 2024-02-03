@@ -72,7 +72,7 @@ const InfiniteScrollTickets = () => {
 
   return (
     <HydrationBoundary state={dehydratedState}>
-      <div className="relative">
+      <div className="relative md:flex md:flex-wrap md:justify-center">
         {data?.pages
           .flatMap((page) => page.tickets)
           .filter(Boolean)

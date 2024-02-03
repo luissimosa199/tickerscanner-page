@@ -1,5 +1,6 @@
 import { Ticket } from "@/types";
 import { calculateTotalQuantity } from "@/utils/calculateTotalQuantity";
+import { formatDate } from "@/utils/formatDate";
 import Image from "next/image";
 
 const OneTicketView = ({ ticket }: { ticket: Ticket }) => {
@@ -16,7 +17,7 @@ const OneTicketView = ({ ticket }: { ticket: Ticket }) => {
         </div>
         <div className="">
           <p className="font-bold text-xl">
-            {ticket.supermarket} {ticket.date}
+            {ticket.supermarket} {formatDate(ticket.date)}
           </p>
 
           <p className="text-gray-400 font-semibold text-lg">
