@@ -110,12 +110,17 @@ const useTicketParser = () => {
     return;
   }, []);
 
+  const ticketReset = () => {
+    setTicket(null)
+  }
+
   const previewRef = useScanner(onSuccess, onError);
 
   return {
     ticket,
     handleSubmit,
     previewRef,
+    ticketReset
   };
 };
 

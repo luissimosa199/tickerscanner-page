@@ -4,15 +4,16 @@ import OneTicketView from "@/components/OneTicketCard";
 import Link from "next/link";
 import OneTicketButtons from "@/components/OneTicketButtons";
 import useTicketParser from "@/hooks/useTicketParser";
+import { useRouter } from "next/navigation";
 
 const Page = () => {
   const [showTextInput, setShowTextInput] = useState<boolean>(false);
-  const { ticket, handleSubmit, previewRef } = useTicketParser();
+  const { ticket, handleSubmit, previewRef, ticketReset } = useTicketParser();
+  const router = useRouter();
 
-  return (
-    <main className="bg-red-500">
-      {/* stage 1 */}
-      {!ticket && (
+  if (!ticket) {
+    return (
+      <main className="bg-red-500">
         <div className="min-h-screen flex flex-col gap-6 pt-4 justify-between items-center">
           <div className="w-full relative">
             <h1 className="font-bold text-2xl text-white text-center">
@@ -55,18 +56,37 @@ const Page = () => {
             Desarrollado por Luis Simosa, 2023
           </p>
         </div>
-      )}
-
-      {/* stage 2 */}
-
-      {ticket && (
-        <div className="min-h-screen flex flex-col pt-4 px-4 justify-between items-center">
-          <OneTicketView ticket={ticket} />
-          <OneTicketButtons />
-        </div>
-      )}
-    </main>
-  );
+      </main>
+    );
+  } else {
+    if (ticket.error) {
+      alert(ticket.error);
+      return (
+        <main className="bg-red-500">
+          <div className="min-h-screen flex flex-col pt-4 px-4 justify-between items-center">
+            <p>Error</p>
+            <button
+              onClick={() => {
+                router.refresh();
+              }}
+              className="bg-white rounded-full px-6 py-4 w-full sm:max-w-xs text-red-500 text-center text-lg font-bold"
+            >
+              Intentar otra vez
+            </button>
+          </div>
+        </main>
+      );
+    } else {
+      return (
+        <main className="bg-red-500">
+          <div className="min-h-screen flex flex-col pt-4 px-4 justify-between items-center">
+            <OneTicketView ticket={ticket} />
+            <OneTicketButtons ticketReset={ticketReset} />
+          </div>
+        </main>
+      );
+    }
+  }
 };
 
 export default Page;

@@ -6,8 +6,8 @@ interface TicketItem {
 }
 
 export interface Discount {
-  desc_items: { desc_name: string; desc_amount: number }[];
-  desc_total: number;
+  disc_items: { desc_name: string; desc_amount: number }[];
+  disc_total: number;
 }
 
 export interface Ticket {
@@ -21,6 +21,7 @@ export interface Ticket {
   payment_method: string;
   og_ticket_url: string;
   supermarket: "DISCO" | "JUMBO" | "EASY" | "COTO";
+  error?: string;
 }
 
 export interface LoginFormValues {
