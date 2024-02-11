@@ -1,5 +1,6 @@
 "use server";
 
+import { revalidateTag } from "next/cache";
 import { cookies } from "next/headers";
 
 const TICKER_APP_URL = process.env.NEXT_PUBLIC_TICKER_APP_URL as string;
@@ -60,7 +61,7 @@ export const scanTicket = async (
     }
 
     const data = await response.json();
-
+    revalidateTag("tickets");
     return { success: true, ...data };
   } catch (error) {
     throw new Error(JSON.stringify(error));

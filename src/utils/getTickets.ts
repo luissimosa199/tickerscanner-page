@@ -11,6 +11,9 @@ export const getTickets = async (page = 1, limit = 10) => {
   const response = await fetch(
     `${TICKER_APP_URL}/tickets?page=${page}&limit=${limit}`,
     {
+      next: {
+        tags: ["tickets"],
+      },
       headers: {
         Authorization: `Bearer ${token?.value}`,
       },
