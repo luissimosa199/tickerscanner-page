@@ -41,10 +41,10 @@ const TicketComponent = ({ ticket }: { ticket: Ticket }) => {
             })}
           </ul>
 
-          {ticket.discount.disc_items.length > 0 && (
+          {ticket.discount.desc_items.length > 0 && (
             <ul className="mt-4">
               <p className="text-sm font-semibold">Descuentos</p>
-              {ticket.discount.disc_items.map(
+              {ticket.discount.desc_items.map(
                 (e: { desc_name: string; desc_amount: number }, idx) => {
                   return (
                     <li
@@ -69,7 +69,7 @@ const TicketComponent = ({ ticket }: { ticket: Ticket }) => {
               Total: ${ticket.total_amount}
             </p>
             <p className="text-base font-semibold">
-              Descuento total: ${ticket.discount.disc_total.toFixed(2)}
+              Descuento total: ${ticket.discount.desc_total.toFixed(2)}
             </p>
           </div>
         </div>
