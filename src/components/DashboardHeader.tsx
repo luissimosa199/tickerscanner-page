@@ -18,7 +18,7 @@ const DashboardHeader = ({
               <Link href="/stats">Estadísticas</Link>
             </li>
             <li className="hover:text-white hover:bg-red-500 hover:outline-2 hover:outline-white hover:outline bg-white w-1/3 transition-all rounded-md ">
-              <Link href="#">Perfil</Link>
+              <Link href="/profile">Perfil</Link>
             </li>
           </ul>
         </div>
