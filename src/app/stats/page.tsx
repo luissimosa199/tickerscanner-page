@@ -1,5 +1,7 @@
 import React from "react";
 import { cookies } from "next/headers";
+import StatCard from "@/components/StatCard";
+import { StatisticId, Statistic } from "@/types";
 
 const TICKER_APP_URL = process.env.NEXT_PUBLIC_TICKER_APP_URL as string;
 
@@ -17,9 +19,19 @@ const StatsPage = async () => {
 
   const allStats = await response.json();
 
-  console.log(allStats);
-
-  return <div>StatsPage</div>;
+  return (
+    <div>
+      <ul>
+        {allStats.map((stat: Statistic) => {
+          return (
+            <li key={stat.id}>
+              <StatCard stat={stat} />
+            </li>
+          );
+        })}
+      </ul>
+    </div>
+  );
 };
 
 export default StatsPage;

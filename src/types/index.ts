@@ -48,3 +48,21 @@ export interface TicketsRequest {
   limit: number;
   error?: string;
 }
+
+export enum StatisticId {
+  TOTAL_COUNT = "TOTAL_COUNT",
+  TOTAL_SPENT = "TOTAL_SPENT",
+  TOTAL_SPENT_LAST_YEAR = "TOTAL_SPENT_LAST_YEAR",
+  TOTAL_SPENT_LAST_90_DAYS = "TOTAL_SPENT_LAST_90_DAYS",
+  TOTAL_SPENT_LAST_30_DAYS = "TOTAL_SPENT_LAST_30_DAYS",
+  MOST_FREQUENTLY_BOUGHT_ITEM = "MOST_FREQUENTLY_BOUGHT_ITEM",
+  TOTAL_DISCOUNT = "TOTAL_DISCOUNT",
+  FIRST_SCAN_DATE = "FIRST_SCAN_DATE",
+  MONTHLY_STATISTICS = "MONTHLY_STATISTICS",
+}
+
+export interface Statistic {
+  name: string;
+  id: StatisticId;
+  data: any; // 'data' can be of any type
+}
