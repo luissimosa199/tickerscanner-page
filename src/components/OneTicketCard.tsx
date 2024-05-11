@@ -3,6 +3,10 @@ import { calculateTotalQuantity } from "@/utils/calculateTotalQuantity";
 import { formatDate } from "@/utils/formatDate";
 import Image from "next/image";
 
+interface OneTicketDiscount {
+  disc_total: number;
+}
+
 const OneTicketView = ({ ticket }: { ticket: Ticket }) => {
   return (
     <div className={`m-2 bg-gray-100 p-4 rounded-3xl w-full max-w-xl `}>
@@ -78,7 +82,8 @@ const OneTicketView = ({ ticket }: { ticket: Ticket }) => {
         <div className="mt-4 text-center">
           <p className="text-xl font-semibold">Total: ${ticket.total_amount}</p>
           <p className="text-xl font-semibold">
-            Descuento total: ${ticket.discount.desc_total}
+            Descuento total: $
+            {(ticket.discount as unknown as OneTicketDiscount).disc_total}
           </p>
         </div>
       </div>
