@@ -31,7 +31,7 @@ const StatsPage = async () => {
   return (
     <div>
       <ul className="flex flex-col justify-center items-center gap-y-4 mt-4">
-        <li className="w-1/2">
+        <li className="md:w-1/2 w-full ">
           {MOST_FREQUENTLY_BOUGHT_ITEM && (
             <BarChart data={MOST_FREQUENTLY_BOUGHT_ITEM} />
           )}
