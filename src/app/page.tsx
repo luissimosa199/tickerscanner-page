@@ -25,7 +25,7 @@ export default function Home() {
         </div>
         <div className="flex justify-end absolute bottom-2">
           <p className="text-red-900 font-semibold text-sm">
-            Desarrollado por Luis Simosa, 2023
+            Desarrollado por Luis Simosa, 2024
           </p>
         </div>
       </div>

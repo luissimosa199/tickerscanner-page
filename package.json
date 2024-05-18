@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@tanstack/react-query": "^5.17.10",
+    "chart.js": "^4.4.3",
     "html5-qrcode": "^2.3.8",
     "next": "14.0.2",
     "pg": "^8.11.3",
