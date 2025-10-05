@@ -25,7 +25,7 @@ const Loading = () => {
           </button>
         </div>
         <p className="text-red-900 font-semibold text-sm">
-          Desarrollado por Luis Simosa, 2023
+          Desarrollado por Luis Simosa, {new Date().getFullYear()}
         </p>
       </div>
     </main>
