@@ -17,6 +17,6 @@ export async function GET(request: NextRequest) {
     return Response.json({ ...data, hasNextPage });
   } catch (error) {
     console.log(error);
-    return Response.json({ error });
+    return Response.json({ error: String(error) }, { status: 502 });
   }
 }

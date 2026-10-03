@@ -24,7 +24,8 @@ const InfiniteScrollTickets = () => {
     queryKey: ["tickets"],
     queryFn: fetchTickets,
     initialPageParam: 2,
-    getNextPageParam: (lastPage) => (lastPage ? lastPage.page + 1 : true),
+    getNextPageParam: (lastPage) =>
+      lastPage?.hasNextPage ? lastPage.page + 1 : undefined,
   });
 
   const nearBottomOfPage = useCallback(
