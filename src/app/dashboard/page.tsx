@@ -2,23 +2,15 @@ import DashboardBody from "@/components/DashboardBody";
 import FloatingButton from "@/components/FloatingButton";
 import { TicketsRequest } from "@/types";
 import { getTickets } from "@/utils/getTickets";
-import { cookies } from "next/headers";
-import { redirect } from "next/navigation";
 import React from "react";
 
+export const dynamic = "force-dynamic";
+
 const Dashboard = async () => {
-  const useCookies = cookies();
-  const token = useCookies.get("token");
-
-  if (!token) {
-    redirect("/login");
-  }
-
   const { tickets, error } = (await getTickets(1, 10)) as TicketsRequest;
 
   if (error) {
     console.log(error);
-    redirect("/login");
   }
 
   return (

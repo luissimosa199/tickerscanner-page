@@ -1,22 +1,27 @@
 import React from "react";
-import { cookies } from "next/headers";
 import StatCard from "@/components/StatCard";
 import { Statistic, StatisticId } from "@/types";
 import BarChart from "@/components/BarChart";
 
 const TICKER_APP_URL = process.env.NEXT_PUBLIC_TICKER_APP_URL as string;
 
+export const dynamic = "force-dynamic";
+
 const StatsPage = async () => {
-  const useCookies = cookies();
-  const token = useCookies.get("token");
   const response = await fetch(`${TICKER_APP_URL}/stats/mainStats`, {
     next: {
       tags: ["stats"],
     },
-    headers: {
-      Authorization: `Bearer ${token?.value}`,
-    },
   });
+
+  if (!response.ok) {
+    console.log("error", response.statusText);
+    return (
+      <p className="text-center mt-4">
+        No se pudieron cargar las estadísticas.
+      </p>
+    );
+  }
 
   const allStats = (await response.json()) as Statistic[];
 
